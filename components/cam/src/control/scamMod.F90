@@ -581,7 +581,7 @@ subroutine setiopupdate
           write(iulog,*) 'nstep = ',get_nstep()
           write(iulog,*) 'ncdate (E3SM date) =',ncdate,' ncsec=',ncsec
           write(iulog,*) 'next_date (IOP file date) =',next_date_print,' &
-	                  next_sec=',next_sec_print
+	                  &next_sec=',next_sec_print
           write(iulog,*)'******* do iop update'
       endif
 
