@@ -816,6 +816,10 @@ end subroutine clubb_init_cnst
     call addfld ('VMAGCL',        horiz_only,     'A',             '-', 'CLUBB gustiness enhancement')
     call addfld ('TPERTBLT',        horiz_only,     'A',             'K', 'perturbation temperature at PBL top')
 
+    ! Adding output KHZT and KHZM
+    call addfld ('KHZT',    (/ 'ilev' /), 'A',        'm2/s', 'Eddy diffusivity [m^2/s]')
+    call addfld ('KHZM',    (/ 'ilev' /), 'A',        'm2/s', 'Eddy diffusivity on momentum levels [m^2/s]')
+
     !  Initialize statistics, below are dummy variables
     dum1 = 300._r8
     dum2 = 1200._r8
@@ -2686,6 +2690,10 @@ end subroutine clubb_init_cnst
    call outfld( 'QT',               qt_output,               pcols, lchnk )
    call outfld( 'SL',               sl_output,               pcols, lchnk )
    call outfld( 'CONCLD',           concld,                  pcols, lchnk )
+
+   ! Adding output fields Khzt and Khzm (not default)
+   call outfld( 'KHZT',             khzt,                    pcols, lchnk )
+   call outfld( 'KHZM',             khzm,                    pcols, lchnk )
 
    !  Output CLUBB history here
    if (l_stats) then 
