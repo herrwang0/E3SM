@@ -42,8 +42,10 @@ PERTURBATIONS = OrderedDict([('woprt', 0.0),
                              ('negprt', -1.0e-14),
                              ])
 FCLD_NC = 'cam.h0.cloud.nc'
+#INIT_COND_FILE_TEMPLATE = \
+#    "SMS_Ly5.ne4_ne4.FC5AV1C-04P2.eos_intel.ne45y.{}.{}.0002-{:02d}-01-00000.nc"
 INIT_COND_FILE_TEMPLATE = \
-    "SMS_Ly5.ne4_ne4.FC5AV1C-04P2.eos_intel.ne45y.{}.{}.0002-{:02d}-01-00000.nc"
+    "SMS.ne30_ne30.F1850C5-CMIP6.edison_intel.mnt10_gautam_br.{}.{}.0002-{:02d}-01-00000.nc"
 # FIXME: should 'cam' be 'atm' now?
 INSTANCE_FILE_TEMPLATE = '{}cam_{:04d}.h0.0001-01-01-00000{}.nc'
 
@@ -86,8 +88,10 @@ class PGN(SystemTestsCommon):
         logger.debug("PGN_INFO: Updating user_nl_* files")
 
         csmdata_root = self._case.get_value("DIN_LOC_ROOT")
-        csmdata_atm = os.path.join(csmdata_root, "atm/cam/inic/homme/ne4_v1_init")
-        csmdata_lnd = os.path.join(csmdata_root, "lnd/clm2/initdata/ne4_v1_init/b58d55680")
+#        csmdata_atm = os.path.join(csmdata_root, "atm/cam/inic/homme/ne4_v1_init")
+#        csmdata_lnd = os.path.join(csmdata_root, "lnd/clm2/initdata/ne4_v1_init/b58d55680")
+        csmdata_atm = os.path.join(csmdata_root, "atm/cam/inic/homme/ne30_F1850C5-CMIP6_init")
+        csmdata_lnd = os.path.join(csmdata_root, "lnd/clm2/initdata/ne30_F1850C5-CMIP6_init")
 
         iinst = 1
         for icond in range(1, NUMBER_INITIAL_CONDITIONS + 1):
