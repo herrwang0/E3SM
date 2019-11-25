@@ -93,7 +93,7 @@ class TSC(SystemTestsCommon):
                 fatm_in = os.path.join(csmdata_atm, INIT_COND_FILE_TEMPLATE.format('cam', 'i', iinst))
                 flnd_in = os.path.join(csmdata_lnd, INIT_COND_FILE_TEMPLATE.format('clm2', 'r', iinst))
                 atmnlfile.write("ncdata  = '{}' \n".format(fatm_in))
-                lndnlfile.write("finidat = '{}' \n".format(flnd_in))
+#                lndnlfile.write("finidat = '{}' \n".format(flnd_in))
 
                 lndnlfile.write("dtime = {} \n".format(dtime))
 
