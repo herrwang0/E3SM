@@ -142,6 +142,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,  prec_gust, gust_
            &               evap  ,evap_16O, evap_HDO, evap_18O, &
            &               taux  ,tauy  ,tref  ,qref  ,   &
            &               duu10n,  ustar_sv   ,re_sv ,ssq_sv,   &
+           &               deltaT, &
            &               missval    )
 
 ! !USES:
@@ -191,6 +192,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,  prec_gust, gust_
    real(R8),intent(out),optional :: ustar_sv(nMax) ! diag: ustar
    real(R8),intent(out),optional :: re_sv   (nMax) ! diag: sqrt of exchange coefficient (water)
    real(R8),intent(out),optional :: ssq_sv  (nMax) ! diag: sea surface humidity  (kg/kg)
+   real(R8),intent(out),optional :: deltaT  (nMax)    ! interface temperature difference  (K)
 
    real(R8),intent(in) ,optional :: missval        ! masked value
 
@@ -436,6 +438,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,  prec_gust, gust_
         if (present(ustar_sv)) ustar_sv(n) = ustar
         if (present(re_sv   )) re_sv(n)    = re
         if (present(ssq_sv  )) ssq_sv(n)   = ssq
+        if (present(deltaT  )) deltaT(n)   = delt 
 
      else
         !------------------------------------------------------------
@@ -457,6 +460,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,  prec_gust, gust_
         if (present(ustar_sv)) ustar_sv(n) = spval
         if (present(re_sv   )) re_sv   (n) = spval
         if (present(ssq_sv  )) ssq_sv  (n) = spval
+        if (present(deltaT  )) deltaT  (n) = spval
      endif
    ENDDO
 
