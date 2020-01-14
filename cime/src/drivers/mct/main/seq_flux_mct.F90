@@ -101,6 +101,7 @@ module seq_flux_mct
   real(r8), allocatable ::  ustar(:)  ! saved ustar
   real(r8), allocatable ::  re   (:)  ! saved re
   real(r8), allocatable ::  ssq  (:)  ! saved sq
+  real(r8), allocatable ::  deltaT  (:)  ! saved deltaT
 
   ! Conversion from degrees to radians
 
@@ -156,6 +157,7 @@ module seq_flux_mct
   integer :: index_xao_So_ustar
   integer :: index_xao_So_re
   integer :: index_xao_So_ssq
+  integer :: index_xao_So_deltaT
   integer :: index_xao_So_duu10n
   integer :: index_xao_So_u10
   integer :: index_xao_So_fswpen
@@ -258,6 +260,9 @@ contains
     allocate(ssq(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate ssq',ier)
     ssq = 0.0_r8
+    allocate(deltaT(nloc),stat=ier)
+    if(ier/=0) call mct_die(subName,'allocate deltaT',ier)
+    deltaT = 0.0_r8
     allocate( uocn(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate uocn',ier)
     uocn = 0.0_r8
@@ -1226,6 +1231,7 @@ contains
        index_xao_So_ustar  = mct_aVect_indexRA(xao,'So_ustar')
        index_xao_So_re     = mct_aVect_indexRA(xao,'So_re')
        index_xao_So_ssq    = mct_aVect_indexRA(xao,'So_ssq')
+       index_xao_So_deltaT    = mct_aVect_indexRA(xao,'So_deltaT')
        index_xao_So_u10    = mct_aVect_indexRA(xao,'So_u10')
        index_xao_So_duu10n = mct_aVect_indexRA(xao,'So_duu10n')
        index_xao_Faox_taux = mct_aVect_indexRA(xao,'Faox_taux')
@@ -1441,7 +1447,7 @@ contains
             tocn , emask, sen , lat , lwup , &
             roce_16O, roce_HDO, roce_18O,    &
             evap , evap_16O, evap_HDO, evap_18O, taux , tauy, tref, qref , &
-            duu10n,ustar, re  , ssq)
+            duu10n,ustar, re  , ssq, deltaT=deltaT)
        !missval should not be needed if flux calc
        !consistent with mrgx2a fraction
        !duu10n,ustar, re  , ssq, missval = 0.0_r8 )
@@ -1462,6 +1468,7 @@ contains
           xao%rAttr(index_xao_So_ustar ,n) = ustar(n)  ! friction velocity
           xao%rAttr(index_xao_So_re    ,n) = re(n)     ! reynolds number
           xao%rAttr(index_xao_So_ssq   ,n) = ssq(n)    ! s.hum. saturation at Ts
+          xao%rAttr(index_xao_So_deltaT   ,n) = deltaT(n)    ! s.hum. saturation at Ts
           xao%rAttr(index_xao_Faox_lwup,n) = lwup(n)
           xao%rAttr(index_xao_So_duu10n,n) = duu10n(n)
           xao%rAttr(index_xao_So_u10   ,n) = sqrt(duu10n(n))

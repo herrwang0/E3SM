@@ -1128,6 +1128,15 @@ contains
     attname  = 'So_ssq'
     call metadata_set(attname, longname, stdname, units)
 
+    ! interface temperature differences in ocean (ocn/atm only)
+    call seq_flds_add(xao_states,"So_deltaT")
+    call seq_flds_add(x2a_states,"So_deltaT")
+    longname = 'Interface temperature differences in ocean'
+    stdname  = 'interface_temperature differences'
+    units    = 'K'
+    attname  = 'So_deltaT'
+    call metadata_set(attname, longname, stdname, units)
+
     ! Square of exch. coeff (tracers) (ocn/atm only)
     call seq_flds_add(xao_states,"So_re")
     call seq_flds_add(x2a_states,"So_re")
